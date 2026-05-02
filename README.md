@@ -23,20 +23,20 @@ Several pre-programmed motion routines are callable from the PLC, including a mu
 
 ```
 ┌────────────┐  pylogix   ┌─────────────────┐  EtherNet/IP  ┌─────────────┐
-│   Python   │───────────►│  CompactLogix   │◄────────────►│    UR5e     │
+│   Python   │───────────►│  CompactLogix   │◄────────────► │    UR5e     │
 │  Script    │    CIP     │     5370        │ GP Registers  │ Controller  │
 │(PS5 Ctrl)  │            │                 │               │  + Gripper  │
 └─────┬──────┘            └──┬──────────┬───┘               └──────┬──────┘
       │                      │          │                          │
       │ Robotiq Socket       │ CIP      │ EtherNet/IP              │
       │ (port 63352)         │          │                          │
-      │                 ┌────┴─────┐  ┌─┴────────────┐            │
-      │                 │ PanelView│  │  1734-AENTR  │            │
-      │                 │   5310   │  │    + OB8     │            │
-      │                 │  (HMI)   │  │(Lights/Btns) │            │
-      │                 └──────────┘  └──────────────┘            │
-      │                                                           │
-      └───────────────────────────────────────────────────────────┘
+      │                 ┌────┴─────┐  ┌─┴────────────┐             │
+      │                 │ PanelView│  │  1734-AENTR  │             │
+      │                 │   5310   │  │    + OB8     │             │
+      │                 │  (HMI)   │  │(Lights/Btns) │             │
+      │                 └──────────┘  └──────────────┘             │
+      │                                                            │
+      └────────────────────────────────────────────────────────────┘
                     (gripper only — does not conflict
                      with EtherNet/IP connection)
 ```
