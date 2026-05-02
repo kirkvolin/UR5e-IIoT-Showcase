@@ -9,10 +9,10 @@ Built as a capstone demonstration of EtherNet/IP communication, PLC programming,
 ## What It Does
 
 ### Candy Roulette Game
-Four indicator lights cycle in sequence like a roulette wheel. A player presses a button to stop the lights — whichever light is active becomes the selected candy. The PLC sends the selection to the UR5e over EtherNet/IP, and the robot picks up the corresponding candy bar with a Robotiq gripper and delivers it to the player. A win/lose mechanic checks whether the player pressed the button matching the active light, and the HMI displays the result with animated fireworks for winners.
+Four indicator lights cycle in sequence like a roulette wheel. A player presses a button to stop the lights — whichever light is active becomes the selected candy. The PLC sends the selection to the UR5e over EtherNet/IP, and the robot picks up the corresponding candy bar with a Robotiq gripper and delivers it to the player. A win/lose mechanic checks whether the player pressed the button matching the active light, and the HMI displays the result.
 
 ### PS5 Manual Control
-A PS5 DualSense controller provides real-time joystick control of the robot arm, routed through the PLC's EtherNet/IP connection. An operator can seamlessly switch between the autonomous candy game and manual joystick control from the HMI touchscreen. Software safety limits restrict the robot to a semicircular operating envelope with soft boundary zones that gradually reduce speed near limits.
+A PS5 DualSense controller provides real-time control of the robot arm, routed through the PLC's EtherNet/IP connection. An operator can seamlessly switch between the autonomous candy game and manual joystick control from the HMI touchscreen. Software safety limits restrict the robot to a semicircular operating envelope with soft boundary zones that gradually reduce speed near limits.
 
 ### Dance and Motion Routines
 Several pre-programmed motion routines are callable from the PLC, including a multi-act flowing dance routine, an expanding spiral pattern, a coil/unwind animation, and a simple wave. All routines use dynamically calculated positions relative to the robot's current pose, so they work from any starting position.
@@ -23,20 +23,20 @@ Several pre-programmed motion routines are callable from the PLC, including a mu
 
 ```
 ┌────────────┐  pylogix   ┌─────────────────┐  EtherNet/IP  ┌─────────────┐
-│   Python   │───────────►│  CompactLogix   │◄────────────►│    UR5e     │
+│   Python   │───────────►│  CompactLogix   │◄────────────► │    UR5e     │
 │  Script    │    CIP     │     5370        │ GP Registers  │ Controller  │
 │(PS5 Ctrl)  │            │                 │               │  + Gripper  │
 └─────┬──────┘            └──┬──────────┬───┘               └──────┬──────┘
       │                      │          │                          │
       │ Robotiq Socket       │ CIP      │ EtherNet/IP              │
       │ (port 63352)         │          │                          │
-      │                 ┌────┴─────┐  ┌─┴────────────┐            │
-      │                 │ PanelView│  │  1734-AENTR  │            │
-      │                 │   5310   │  │    + OB8     │            │
-      │                 │  (HMI)   │  │(Lights/Btns) │            │
-      │                 └──────────┘  └──────────────┘            │
-      │                                                           │
-      └───────────────────────────────────────────────────────────┘
+      │                 ┌────┴─────┐  ┌─┴────────────┐             │
+      │                 │ PanelView│  │  1734-AENTR  │             │
+      │                 │   5310   │  │    + OB8     │             │
+      │                 │  (HMI)   │  │(Lights/Btns) │             │
+      │                 └──────────┘  └──────────────┘             │
+      │                                                            │
+      └────────────────────────────────────────────────────────────┘
                     (gripper only — does not conflict
                      with EtherNet/IP connection)
 ```
@@ -83,7 +83,7 @@ The UR5e has no built-in remote control system like some industrial robots. Inst
 | 3 | Candy 3 | Pick candy from position 3, deliver to player |
 | 4 | Candy 4 | Pick candy from position 4, deliver to player |
 | 5 | Wave | Wave routine using taught waypoints |
-| 6 | Dance | Multi-act flowing dance with PLC cancel support |
+| 6 | Dance |  Flowing dance with PLC cancel support |
 | 7 | Manual | PS5 joystick velocity control via float registers |
 
 ---
@@ -243,4 +243,4 @@ See [HARDWARE_LIST.md](HARDWARE_LIST.md) for a complete bill of materials includ
 
 ## Acknowledgments
 
-Built using documentation from Universal Robots, Rockwell Automation, PATLITE, AutomationDirect, and Robotiq. EtherNet/IP integration based on UR's official Allen-Bradley integration guide with significant extensions for game logic, motion routines, and controller integration.
+Built using documentation from Universal Robots, Rockwell Automation, AutomationDirect, and Robotiq. EtherNet/IP integration based on UR's official Allen-Bradley integration guide with significant extensions for game logic, motion routines, and controller integration.
