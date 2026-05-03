@@ -82,10 +82,12 @@ All components modelled in Fusion 360 were designed to by mounted to standard 1"
 
 | Device | Current Draw | Notes |
 |--------|-------------|-------|
+| CompactLogix 1769-L33ER | 800 mA | Controller logic power from 24VDC bus |
 | 1734-AENTR | 430 mA | Adapter logic + backplane |
 | 1734-OB8 | 32 mA | Backplane overhead |
-| 4x Indicator Lights | 320 mA | 80 mA each (worst case with incandescent bulbs) |
+| 4x Indicator Lights (remote I/O) | 320 mA | 80 mA each (worst case) |
+| 4x Indicator Lights (PLC console) | 320 mA | 80 mA each (worst case) |
 | PATLITE Tower Light | 215 mA | 4 tiers + buzzer steady state |
 | PanelView 5310 | 500 mA | Estimated (verify per model) |
-| **24VDC Total** | **~1.5 A** | **Recommended: 24VDC 3A supply** |
+| **24VDC Total** | **~2.6 A** | **Recommended: 24VDC 5A supply** |
 | UR5e Controller | ~4 A @ 120VAC | Separate AC mains circuit |
