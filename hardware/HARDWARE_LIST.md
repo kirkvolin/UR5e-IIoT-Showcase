@@ -17,7 +17,7 @@ All components modelled in Fusion 360 were designed to by mounted to standard 1"
 
 | Component | Manufacturer | Part Number | Description |
 |-----------|-------------|-------------|-------------|
-| PLC Controller | Allen-Bradley | 1769-L33ER | CompactLogix 5370 controller |
+| PLC Controller | Allen-Bradley | 1769-L16ER | CompactLogix 5370 controller |
 | Remote I/O Adapter | Allen-Bradley | 1734-AENTR | POINT I/O Dual Port EtherNet/IP adapter |
 | Output Module | Allen-Bradley | 1734-OB8 | POINT I/O 8-point 24VDC sourcing output module |
 
