@@ -161,7 +161,7 @@ Offsets are applied in the reference pose's local frame, so if the candy tray is
 
 ## Hardware
 
-See [HARDWARE_LIST.md](HARDWARE_LIST.md) for a complete bill of materials including part numbers, network configuration, and power budget.
+See [HARDWARE_LIST.md](hardware/HARDWARE_LIST.md) for a complete bill of materials including part numbers, network configuration, and power budget.
 
 ### Network
 | Device | IP Address | Role |
