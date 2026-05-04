@@ -1,4 +1,4 @@
-# UR5e Candy Roulette — Industrial Robot Game System
+# UR5e Candy Roulette - Industrial Robot Game System
 
 A fully integrated industrial automation project combining a Universal Robots UR5e collaborative robot, Allen-Bradley CompactLogix PLC, PanelView HMI, and PS5 controller into an interactive candy dispensing game and manual robot control system.
 
@@ -9,7 +9,7 @@ Built as a capstone demonstration of EtherNet/IP communication, PLC programming,
 ## What It Does
 
 ### Candy Roulette Game
-Four indicator lights cycle in sequence like a roulette wheel. A player presses a button to stop the lights — whichever light is active becomes the selected candy. The PLC sends the selection to the UR5e over EtherNet/IP, and the robot picks up the corresponding candy bar with a Robotiq gripper and delivers it to the player. A win/lose mechanic checks whether the player pressed the button matching the active light, and the HMI displays the result.
+Four indicator lights cycle in sequence like a roulette wheel. A player presses a button to stop the lights - whichever light is active becomes the selected candy. The PLC sends the selection to the UR5e over EtherNet/IP, and the robot picks up the corresponding candy bar with a Robotiq gripper and delivers it to the player. A win/lose mechanic checks whether the player pressed the button matching the active light, and the HMI displays the result.
 
 ### PS5 Manual Control
 A PS5 DualSense controller provides real-time control of the robot arm, routed through the PLC's EtherNet/IP connection. An operator can seamlessly switch between the autonomous candy game and manual joystick control from the HMI touchscreen. Software safety limits restrict the robot to a semicircular operating envelope with soft boundary zones that gradually reduce speed near limits.
@@ -37,11 +37,11 @@ Several pre-programmed motion routines are callable from the PLC, including a mu
       │                 └──────────┘  └──────────────┘             │
       │                                                            │
       └────────────────────────────────────────────────────────────┘
-                    (gripper only — does not conflict
+                    (gripper only - does not conflict
                      with EtherNet/IP connection)
 ```
 
-All devices communicate over a single Ethernet network. The PLC acts as the central coordinator — the UR5e never receives commands directly from the HMI or PS5 controller. Everything routes through the PLC's ladder logic.
+All devices communicate over a single Ethernet network. The PLC acts as the central coordinator - the UR5e never receives commands directly from the HMI or PS5 controller. Everything routes through the PLC's ladder logic.
 
 ---
 
@@ -52,16 +52,16 @@ The UR5e has no built-in remote control system like some industrial robots. Inst
 ### PLC → Robot (Commands)
 | Register | Purpose |
 |----------|---------|
-| Bool Register 0 | Start flag — latch to trigger a move |
+| Bool Register 0 | Start flag - latch to trigger a move |
 | Int Register 0 | Program command (1-7) |
 | Float Registers 0-6 | Velocity commands for PS5 manual control |
 
 ### Robot → PLC (Status)
 | Register | Purpose |
 |----------|---------|
-| Bool Register 0 | Busy — TRUE while executing |
-| Bool Register 1 | Ready — TRUE when idle |
-| Bool Register 2 | Done — TRUE when move complete |
+| Bool Register 0 | Busy - TRUE while executing |
+| Bool Register 1 | Ready - TRUE when idle |
+| Bool Register 2 | Done - TRUE when move complete |
 | Int Register 0 | Echo of current program number |
 
 ### Handshake Sequence
@@ -94,7 +94,7 @@ The candy roulette game runs as a state machine in PLC ladder logic:
 
 | State | Name | Description |
 |-------|------|-------------|
-| 0 | IDLE | Attract mode — all lights pulse, waiting for button press |
+| 0 | IDLE | Attract mode - all lights pulse, waiting for button press |
 | 1 | CYCLING | Lights chase in sequence via SQO sequencer, player presses button to stop |
 | 2 | SELECTED | Frozen selection sent to UR via EtherNet/IP handshake |
 | 3 | DELIVERY | Robot picks and delivers candy, selected light stays on |
@@ -105,13 +105,13 @@ The candy roulette game runs as a state machine in PLC ladder logic:
 All four indicator lights are driven by a single OTE instruction each at the end of the ladder program, with branched OR conditions determining which state drives each light. This pattern prevents flickering caused by multiple OTE instructions fighting over the same output across different state rungs.
 
 ### Sequencer
-The light chase in the cycling state uses an SQO (Sequencer Output) instruction stepping through a 4-element array of bit patterns (1, 2, 4, 8) at a configurable timer rate. This separates the chase pattern from the logic — changing the sequence order or adding patterns only requires editing the data array, not the ladder rungs.
+The light chase in the cycling state uses an SQO (Sequencer Output) instruction stepping through a 4-element array of bit patterns (1, 2, 4, 8) at a configurable timer rate. This separates the chase pattern from the logic - changing the sequence order or adding patterns only requires editing the data array, not the ladder rungs.
 
 ---
 
 ## PS5 Controller Integration
 
-The Python script connects to the PLC via pylogix (CIP over Ethernet) — not directly to the robot. This avoids RTDE port conflicts when the UR is simultaneously running the candy game program.
+The Python script connects to the PLC via pylogix (CIP over Ethernet) - not directly to the robot. This avoids RTDE port conflicts when the UR is simultaneously running the candy game program.
 
 ### Control Mapping
 | Input | Function |
@@ -142,7 +142,7 @@ A configurable rotation angle aligns the joystick X/Y axes with the operator's v
 
 ## Waypoint System
 
-All robot positions are defined as offsets from a single taught reference point using URScript's `pose_trans()` function. When the physical setup moves, only the reference point needs to be re-taught — all other positions (candy locations, entry points, delivery position, home) automatically shift with it.
+All robot positions are defined as offsets from a single taught reference point using URScript's `pose_trans()` function. When the physical setup moves, only the reference point needs to be re-taught - all other positions (candy locations, entry points, delivery position, home) automatically shift with it.
 
 ```
 ref = p[0.350, -0.100, 0.200, 0, 3.14, 0]   # Teach this one point
